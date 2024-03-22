@@ -671,6 +671,9 @@ class App(Gtk.Application):
 
     @idle
     def update_dark_mode(self, active):
+        settings = Gtk.Settings.get_default()
+        is_global_dark_theme_active = settings.get_property('gtk-application-prefer-dark-theme')
+        active = active or is_global_dark_theme_active
         Gtk.Settings.get_default().set_property("gtk-application-prefer-dark-theme", active)
 
     def update_timestamp_format(self, active):
